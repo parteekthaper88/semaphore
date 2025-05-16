@@ -56,6 +56,11 @@
         commands:
           - show running-config
       register: running_config
+    - name: Ensure backup directory exists
+      file:
+        path: "/home/parteek/ansible/playbooks/cisco/config_backups"
+        state: directory
+        mode: '0755'
 
     - name: Save config output to local file with timestamp
       vars:

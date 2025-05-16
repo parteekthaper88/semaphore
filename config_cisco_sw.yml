@@ -56,18 +56,13 @@
         commands:
           - show running-config
       register: running_config
-    - name: Ensure backup directory exists
-      file:
-        path: "/home/parteek/ansible/playbooks/cisco/config_backups"
-        state: directory
-        mode: '0755'
-
-    - name: Save config output to local file with timestamp
+      
+    - name: Save config output to file with timestamp
       vars:
         timestamp: "{{ lookup('pipe', 'date +%Y-%m-%d_%H-%M-%S') }}"
       copy:
         content: "{{ running_config.stdout[0] }}"
-        dest: "{/home/parteek/ansible/playbooks/cisco/config_backups/{{ switch_hostname }}-running-config-{{ timestamp }}.txt"
+        dest: "/opt/semaphore-backups/{{ inventory_hostname }}-running-config-{{ timestamp }}.txt"
 
   handlers:
     - name: Save config

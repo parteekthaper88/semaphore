@@ -62,7 +62,7 @@
         timestamp: "{{ lookup('pipe', 'date +%Y-%m-%d_%H-%M-%S') }}"
       copy:
         content: "{{ running_config.stdout[0] }}"
-        dest: "{{ playbook_dir }}/config_backups/{{ switch_hostname }}-running-config-{{ timestamp }}.txt"
+        dest: "{/home/parteek/ansible/playbooks/cisco/config_backups/{{ switch_hostname }}-running-config-{{ timestamp }}.txt"
 
   handlers:
     - name: Save config
